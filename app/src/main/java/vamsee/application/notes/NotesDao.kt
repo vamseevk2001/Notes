@@ -1,17 +1,18 @@
 package vamsee.application.notes
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
 interface NotesDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(note: Notes)
+    suspend fun insert(note: Notes)
 
     @Delete
-    fun delete(note: Notes)
+    suspend fun delete(note: Notes)
 
     @Query("Select * from notes_table order by id ASC")
-    fun fetchAll() : List<Notes>
+    fun fetchAll() : LiveData<List<Notes>>
 
 }

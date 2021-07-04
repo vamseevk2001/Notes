@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class NotesAdapter(private val context: Context, private val listener: onClick): RecyclerView.Adapter<ViewHolder>() {
+class NotesAdapter(private val context: Context, private val listener: OnClick): RecyclerView.Adapter<ViewHolder>() {
 
     private val notes: ArrayList<Notes> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,6 +28,12 @@ class NotesAdapter(private val context: Context, private val listener: onClick):
     override fun getItemCount(): Int {
         return notes.size
     }
+
+    fun updateNote(list: List<Notes>){
+        notes.clear()
+        notes.addAll(list)
+        notifyDataSetChanged()
+    }
 }
 
 class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -35,6 +41,6 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
     val delete = itemView.findViewById<ImageView>(R.id.delete)
 }
 
-interface onClick{
+interface OnClick{
     fun onDelete(notes: Notes)
 }
